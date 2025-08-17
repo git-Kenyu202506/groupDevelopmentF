@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>社員情報検索</title>
-		<link rel="stylesheet" th:href="@{/css/search.css}">
+		<link rel="stylesheet" th:href="@{/search.css}">
 
 </head>
 
@@ -21,8 +21,8 @@
 			<td th:text="${staff.id}"></td>
 			<td th:text="${staff.name}"></td>
 			<td th:text="${staff.age}"></td>
-<!--			<td th:text="${staff.startDate}"></td>-->
-<!--			<td th:text="${staff.endDate}"></td>-->
+			<td th:text="${staff.startDate}"></td>
+			<td th:text="${staff.endDate}"></td>
 		</tr>
 	</table>
 </body>

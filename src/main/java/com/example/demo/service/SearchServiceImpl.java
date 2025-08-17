@@ -16,13 +16,13 @@ public class SearchServiceImpl implements SearchService {
 
 	//ユーザー情報取得
 	@Override
-	public List<Staff> getAllStaff() {
-		return mapper.selectAllStaff();
+	public List<Staff> searchAll() {
+		return mapper.searchAll();
 	}
 
-	//検索条件で一致するユーザーを取得
 	@Override
-	public List<Staff> getSearchStaff(Staff staff) {
-		return mapper.searchStaff(staff);
+	public List<Staff> getSearch(Staff staff) {
+		return null;
 	}
+
 }

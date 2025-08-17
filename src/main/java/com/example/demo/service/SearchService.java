@@ -9,7 +9,7 @@ import com.example.demo.entity.Staff;
 @Service
 public interface SearchService {
 	//ユーザー取得
-	public List<Staff> selectAll();
+	public List<Staff> searchAll();
 	//検索条件ユーザー取得
 	public List<Staff> getSearch(Staff staff);
 
