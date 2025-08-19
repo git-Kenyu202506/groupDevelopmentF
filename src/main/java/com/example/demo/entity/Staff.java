@@ -37,17 +37,17 @@ public class Staff {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	public LocalDateTime getStart_date() {
+	public LocalDateTime getStartDate() {
 		return startDate;
 	}
-	public void setStart_date(LocalDateTime start_date) {
-		this.startDate = start_date;
+	public void setStartDate(LocalDateTime startDate) {
+		this.startDate = startDate;
 	}
-	public LocalDate getEnd_date() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
-	public void setEnd_date(LocalDate end_date) {
-		this.endDate = end_date;
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
 	}
 	
 //	コンストラクタ
