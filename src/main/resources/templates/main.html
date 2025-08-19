@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メインメニュー</title>
+
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header>
+        <h3>トップメニュー</h3>
+        <p th:text = "${session.keyName} + 'さん'"></p>
+         <p th:text = "${#temporals.format(session.keyDateTime,'yyyy/MM/dd　HH:mm:ss')}"></p>
+    </header>
+
+    <!-- メイン -->
+     <main>
+        <a href="@{/select}">社員情報検索</a>
+        <a href="@{/update}">社員情報更新</a>
+        <a href="@{/delete}">社員情報削除</a>
+        <a href="@{/insert}">社員情報登録</a>
+     </main>
+
+     <!-- フッター -->
+      <footer>
+        <small>Copyright&copy; 2025JavaStudy TeamF</small>
+      </footer>
+
+</body>
+</html>
