@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+/* ログイン画面 */
+div.login_form{
+    max-width: 500px;
+    margin: 0 auto;
+    margin-top: 50px;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    border-radius: 10px;
+    border: 1px solid #5f5c5c;
+}
+
+h1{
+    text-align: center;
+}
+
+form{
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+label{
+    display: block;
+    text-align: left;
+    padding-bottom: 5px;
+}
+
+input{
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    min-height: 40px;
+    border-radius: 3px;
+    box-sizing: border-box;
+    border: 1px solid #5f5c5c;
+}
+
+input.login_bt{
+    margin-top: 20px;
+    padding: 15px;
+    font-size: 20px;
+    color: aliceblue;
+    background-color: rgb(29, 156, 163);
+}
+
+span{
+    color: crimson;
+}
