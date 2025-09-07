@@ -46,13 +46,13 @@ public class LoginController {
 			this.session.setAttribute("keyDateTime",LocalDateTime.now());
 			return "main";
 		}else {
-			model.addAttribute("error","入力が間違っています");
+			model.addAttribute("error","※入力が間違っています");
 			return "loginForm";
 			}
 		}
 		
 		catch(NumberFormatException e) {
-			model.addAttribute("error","入力が間違っています");
+			model.addAttribute("error","※入力が間違っています");
 			return "loginForm";
 			}
 	}
