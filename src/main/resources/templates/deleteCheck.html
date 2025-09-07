@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>削除確認画面</title>
+</head>
+<body>
+        <!-- ヘッダー -->
+    <header>
+        <h3>トップメニュー</h3>
+        <!-- <p th:text = "${session.keyName} + 'さん'"></p>
+         <p th:text = "${#temporals.format(session.keyDateTime,'yyyy/MM/dd　HH:mm:ss')}"></p> -->
+    </header>
+
+        <!-- メイン -->
+    <main>
+        <table>
+            <!-- 削除対象一覧 -->
+            <caption>削除確認画面</caption>
+            <tr>
+                <th>削除予定ID</th>
+                <td th:each = "delID : ${check}" th:text = "${delID}"></td>
+            </tr>
+        </table>
+
+        <!-- 削除ボタン -->
+        <form action="/delete/execution" method="post">
+            <input th:each = "delID : ${check}" type="hidden" name="id" th:value="${delID}">
+            <button type="submit">削除</button>
+        </form>
+
+        <!-- 戻るボタン -->
+         <form th:switch = "${back}" action="/delete/back" method="get">
+            <div th:case = "deleteForm">
+                <input type="hidden" name="url" value="deleteForm">
+            </div>
+            <div th:case = "searchForm">
+                <input type="hidden" name="url" value="searchForm">
+            </div>
+            <button type="submit">戻る</button>
+         </form>
+
+    </main>
+
+         <!-- フッター -->
+      <footer>
+        <small>Copyright&copy; 2025JavaStudy TeamF</small>
+      </footer>
+
+
+</body>
+</html>
