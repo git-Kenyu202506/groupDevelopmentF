@@ -36,8 +36,9 @@ public class LoginController {
 				Model model,
 				@RequestParam("id")String id,
 				@RequestParam("password")String password) {
-		int numid = Integer.parseInt(id);
-		Staff staff = loginService.login(numid,password);
+		try{
+			int numid = Integer.parseInt(id);
+			Staff staff = loginService.login(numid,password);
 		
 //		ログイン成功
 		if(staff != null) {
@@ -45,8 +46,14 @@ public class LoginController {
 			this.session.setAttribute("keyDateTime",LocalDateTime.now());
 			return "main";
 		}else {
-			model.addAttribute("error","入力が間違っています");
+			model.addAttribute("error","※入力が間違っています");
 			return "loginForm";
+			}
 		}
+		
+		catch(NumberFormatException e) {
+			model.addAttribute("error","※入力が間違っています");
+			return "loginForm";
+			}
 	}
 }
