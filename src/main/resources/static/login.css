@@ -48,3 +48,54 @@ input.login_bt{
 span{
     color: crimson;
 }
+
+/* ヘッダー */
+header{
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-end;
+    padding: 0 20px;
+    background-color: cadetblue;
+    color: #fff;
+}
+
+div.user{
+    float: right;
+}
+
+/* メイン */
+main{
+    width: 80%;
+    min-height: 65vh;
+    margin: 0 auto;
+    display: flex;  
+    justify-content:center; 
+}
+
+/* .meyu_right{
+    width: 45px;
+} */
+
+a{
+    display: block;
+    margin: 50px;
+    padding: 50px;
+    max-width: 300px;
+    text-align: center;
+    border: 1px solid #5f5c5c;
+    text-decoration: none;
+    color: inherit;
+    background-color: rgb(246, 249, 150);
+}
+
+a:hover{
+    opacity: 0.5;
+}
+
+/* フッター */
+footer{
+    padding: 30px;
+    height: auto;
+    text-align: center;
+    background-color: cadetblue;
+}
