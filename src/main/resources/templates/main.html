@@ -4,22 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>メインメニュー</title>
+     <link rel="stylesheet" th:href="@{/login.css}"/>
 
 </head>
 <body>
     <!-- ヘッダー -->
     <header>
         <h3>トップメニュー</h3>
-        <p th:text = "${session.keyName} + 'さん'"></p>
-         <p th:text = "${#temporals.format(session.keyDateTime,'yyyy/MM/dd　HH:mm:ss')}"></p>
+        <div class="user">
+          <p th:text = "${session.keyName} + 'さん'"></p>
+          <p th:text = "${#temporals.format(session.keyDateTime,'yyyy/MM/dd　HH:mm:ss')}"></p>
+        </div>
     </header>
 
     <!-- メイン -->
      <main>
+      <div class="menyu_right">
         <a href="@{/select}">社員情報検索</a>
         <a href="@{/update}">社員情報更新</a>
+      </div>
+      <div class="menyu_left">
         <a href="@{/delete}">社員情報削除</a>
         <a href="@{/insert}">社員情報登録</a>
+      </div>
      </main>
 
      <!-- フッター -->
