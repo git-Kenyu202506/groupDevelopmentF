@@ -44,6 +44,7 @@ public class LoginController {
 		if(staff != null) {
 			this.session.setAttribute("keyName",staff.getName());
 			this.session.setAttribute("keyDateTime",LocalDateTime.now());
+			this.session.setAttribute("keyId", staff.getId());
 			return "main";
 		}else {
 			model.addAttribute("error","※入力が間違っています");
