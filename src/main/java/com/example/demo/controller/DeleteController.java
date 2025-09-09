@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.service.DeleteService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 
 @RequestMapping("/delete")
@@ -20,10 +23,14 @@ public class DeleteController {
 	@Autowired
 	private DeleteService deleteService;
 	
+	@Autowired
+	private HttpSession session;
 	
 //	localhost:8080/delete/formにアクセス→削除入力画面を表示
 	@GetMapping("/form")
-	public String deleteForm() {
+	public String deleteForm(Model model) {
+		String name  = (String)this.session.getAttribute("keyName");
+		LocalDateTime dateTime = (LocalDateTime)this.session.getAttribute("keyDateTime");
 		return "deleteForm";
 	}
 	
