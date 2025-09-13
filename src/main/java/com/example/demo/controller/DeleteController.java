@@ -60,9 +60,11 @@ public class DeleteController {
 	@GetMapping("/back")
 	public String deleteBack(
 			Model model,
-			@RequestParam("url")String url){
+			@RequestParam("url")String url,
+			@RequestParam("id")List<Integer>idList){
 		
 				if(url.equals ("deleteForm")) {
+					model.addAttribute("id",idList.get(0));
 					return "deleteForm";
 				}else {
 					return "searchForm";

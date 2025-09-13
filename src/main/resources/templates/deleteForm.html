@@ -17,7 +17,7 @@
     <main>
         <form action="/delete/check" method="post">
             <label for="id">ID</label>
-            <input type="number" name="id">
+            <input type="number" name="id" th:value ="${id}">
             <input type="hidden" name="url" value="deleteForm">
             <input type="submit" value="確認">
         </form>

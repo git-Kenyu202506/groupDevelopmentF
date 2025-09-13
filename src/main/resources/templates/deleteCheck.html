@@ -34,6 +34,7 @@
          <form th:switch = "${back}" action="/delete/back" method="get">
             <div th:case = "deleteForm">
                 <input type="hidden" name="url" value="deleteForm">
+                <input th:each = "delID : ${check}" type="hidden" name="id" th:value="${delID}">
             </div>
             <div th:case = "searchForm">
                 <input type="hidden" name="url" value="searchForm">
