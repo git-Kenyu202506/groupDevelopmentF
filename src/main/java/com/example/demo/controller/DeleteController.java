@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ public class DeleteController {
 	public String deleteForm(Model model) {
 		String name  = (String)this.session.getAttribute("keyName");
 		LocalDateTime dateTime = (LocalDateTime)this.session.getAttribute("keyDateTime");
+		int id = (int)this.session.getAttribute("keyId");
 		return "deleteForm";
 	}
 	
@@ -38,21 +40,64 @@ public class DeleteController {
 	@PostMapping("/check")
 	public String deleteCheck(
 			Model model,
-			@RequestParam("id")List<Integer>idList,
+			@RequestParam("id")List<String>idList,
 			@RequestParam("url")String url){
-		model.addAttribute("check",idList);
-		model.addAttribute("back",url);
-		return "deleteCheck";
+		try{
+			List<Integer>numIdList = new ArrayList<Integer>();
+			for(String id : idList) {
+				numIdList.add(Integer.parseInt(id));
+			}
+//			空欄だった場合のエラー処理
+			if(numIdList.isEmpty()) {
+				model.addAttribute("error","1");
+				return "deleteForm";
+				
+//			成功した場合の処理
+			}else{
+				model.addAttribute("check",numIdList);
+				model.addAttribute("back",url);
+				return "deleteCheck";
+			}
+
+//			数字以外が入力された場合のエラー処理
+		}	catch(NumberFormatException e) {
+			model.addAttribute("error","2");
+			model.addAttribute("id",idList.get(0));
+			return "deleteForm";
+			}
+		
 	}
 	
 //	localhost:8080/delete/executionにアクセス→削除処理→削除完了画面
 	@PostMapping("/execution")
 	public String deleteExecution(
 			Model model,
-			@RequestParam("id")List<Integer>idList) {
-		deleteService.delete(idList);
-		model.addAttribute("comp","削除が完了しました");
-		return "deleteCompletion";
+			@RequestParam("id")List<Integer>idList,
+			@RequestParam("url")String url) {
+		int id = (int)this.session.getAttribute("keyId");
+		
+//		自分のデータ削除しようとした場合のエラー処理
+		if(id == idList.get(0)) {
+			model.addAttribute("error","3");
+			model.addAttribute("check",idList);
+			model.addAttribute("back",url);
+			return "deleteCheck";
+		}
+		
+		int delNum = deleteService.delete(idList);
+		
+//		対象データがなかった場合のエラー処理		
+		if(delNum == 0) {
+			model.addAttribute("error","4");
+			model.addAttribute("check",idList);
+			model.addAttribute("back",url);
+			return "deleteCheck";
+		}
+		
+		else {
+			model.addAttribute("comp","削除が完了しました");
+			return "deleteCompletion";
+		}
 	}
 	
 	
