@@ -31,7 +31,7 @@ public class LoginController {
 	}
 	
 //	ログイン処理
-	@PostMapping("/login")
+	@PostMapping("/topmenu")
 		public String setLogin(
 				Model model,
 				@RequestParam("id")String id,
