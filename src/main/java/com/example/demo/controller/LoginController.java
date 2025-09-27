@@ -36,24 +36,43 @@ public class LoginController {
 				Model model,
 				@RequestParam("id")String id,
 				@RequestParam("password")String password) {
+//		空欄だった場合のエラー処理
+		if(id.isEmpty()) {
+			model.addAttribute("error","1");
+			model.addAttribute("password",password);
+			return "loginForm";
+			
+		}else if(password.isEmpty()) {
+			model.addAttribute("id",id);
+			model.addAttribute("error","1");
+			return "loginForm";
+		}	
+		
 		try{
 			int numid = Integer.parseInt(id);
 			Staff staff = loginService.login(numid,password);
-		
-//		ログイン成功
-		if(staff != null) {
+	
+//		対象データがなかった場合のエラー処理	
+		if(staff == null) {
+			model.addAttribute("error","3");
+			model.addAttribute("id",id);
+			model.addAttribute("password",password);
+			return "loginForm";
+		}
+//		ログイン成功	
+		else {
 			this.session.setAttribute("keyName",staff.getName());
 			this.session.setAttribute("keyDateTime",LocalDateTime.now());
 			this.session.setAttribute("keyId", staff.getId());
 			return "main";
-		}else {
-			model.addAttribute("error","※入力が間違っています");
-			return "loginForm";
-			}
 		}
 		
+		}
+//		idに数字以外が入力された場合のエラー処理
 		catch(NumberFormatException e) {
-			model.addAttribute("error","※入力が間違っています");
+			model.addAttribute("error","2");
+			model.addAttribute("id",id);
+			model.addAttribute("password",password);
 			return "loginForm";
 			}
 	}

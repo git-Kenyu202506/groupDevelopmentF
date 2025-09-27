@@ -11,16 +11,29 @@
     <h1>ログイン</h1>
     <form action="/login" method="post">
         <label for="id">ID</label>
-        <input type="text" id="id" name="id"><br>
+        <input type="text" id="id" name="id" th:value ="${id}"><br>
 
         <label for="password">パスワード</label>
-        <input type="password" id="password" name="password"><br>
-
-        <!-- エラーメッセージ -->
-        <span th:text = "${error}"></span>
+        <input type="password" id="password" name="password" th:value ="${password}"><br>
         
         <input class="login_bt" type="submit" value="ログイン">
     </form>
+
+            <!-- 空欄のエラー -->
+        <script th:if="${error} == 1">
+            alert('※空欄があります。値を入力してください');
+        </script>
+
+            <!-- 数字以外のエラー -->
+        <script th:if="${error} == 2">
+            alert('※IDは数字を入力してください');
+        </script>
+
+            <!-- 対象データがなかった場合のエラー -->
+        <script th:if="${error} == 3">
+            alert('※対象データがありません');
+        </script>
+
     </div>
 </body>
 </html>
