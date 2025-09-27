@@ -7,6 +7,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface DeleteMapper {
 	
 	@Delete("DELETE FROM staff WHERE id = #{id}")
-	public void delete(int id);
-
+	public int delete(int id);
 }

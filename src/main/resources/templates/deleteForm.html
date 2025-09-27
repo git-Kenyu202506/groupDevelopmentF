@@ -4,23 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>削除入力画面</title>
+     <link rel="stylesheet" th:href="@{/delete.css}"/>
 </head>
 <body>
         <!-- ヘッダー -->
     <header>
         <h3>トップメニュー</h3>
+        <div class="user">
         <p th:text = "${session.keyName} + 'さん'"></p>
-         <p th:text = "${#temporals.format(session.keyDateTime,'yyyy/MM/dd　HH:mm:ss')}"></p>
+        <p th:text = "${#temporals.format(session.keyDateTime,'yyyy/MM/dd　HH:mm:ss')}"></p>
+        </div>
     </header>
 
         <!-- メイン -->
     <main>
+        <div class="delete_form">
+        <h3>削除ID入力画面</h1>
         <form action="/delete/check" method="post">
             <label for="id">ID</label>
-            <input type="number" name="id" th:value ="${id}">
+            <input type="text" name="id" th:value ="${id}">
             <input type="hidden" name="url" value="deleteForm">
-            <input type="submit" value="確認">
+            <input  class="check_bt" type="submit" value="確認">
         </form>
+
+        <!-- 空欄エラー -->
+        <script th:if="${error} == 1">
+            alert('※値を入力してください');
+        </script>
+
+        <!-- 数字以外のエラー -->
+        <script th:if="${error} == 2">
+            alert('※数字を入力してください');
+        </script>
+        </div>
     </main>
 
          <!-- フッター -->

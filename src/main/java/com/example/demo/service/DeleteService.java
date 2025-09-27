@@ -13,9 +13,10 @@ public class DeleteService {
 	@Autowired
 	private DeleteMapper deleteMapper;
 	
-	public void delete(List<Integer>idList) {
+	public int delete(List<Integer>idList) {
+		int delNum = 0;
 		for(int id : idList) {
-			deleteMapper.delete(id);
-		}
+			delNum = deleteMapper.delete(id);
+		}return delNum;
 	}
 }
