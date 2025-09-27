@@ -95,7 +95,7 @@ public class DeleteController {
 		}
 		
 		else {
-			model.addAttribute("comp","削除が完了しました");
+			model.addAttribute("comp","社員情報の削除が完了しました");
 			return "deleteCompletion";
 		}
 	}
