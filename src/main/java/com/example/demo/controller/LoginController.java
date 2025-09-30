@@ -76,4 +76,11 @@ public class LoginController {
 			return "loginForm";
 			}
 	}
+	
+//	メニュー画面確認用（localhost:8080/topmenu）
+	@GetMapping("/topmenu")
+		public String getTopmenyu(Model model) {
+		return "main";
+	}
+	
 }
