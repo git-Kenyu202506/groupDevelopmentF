@@ -12,17 +12,17 @@ import com.example.demo.mapper.SearchMapper;
 public class SearchServiceImpl implements SearchService {
 
 	@Autowired
-	private SearchMapper mapper;
+	private SearchMapper searchMapper;
 
 	//ユーザー情報取得
 	@Override
 	public List<Staff> searchAll() {
-		return mapper.searchAll();
+		return searchMapper.searchAll();
 	}
 
 	@Override
-	public List<Staff> getSearch(Staff staff) {
-		return null;
+	public List<Staff> searchUser(Staff staff) {
+		return searchMapper.searchUser(staff);
 	}
 
 }

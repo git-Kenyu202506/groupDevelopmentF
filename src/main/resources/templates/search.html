@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>検索</title>
+	<link rel="stylesheet" th:href="@{/search.css}">
+</head>
+
+<body>
+	<form th:action="@{/search/list}" th:object="${staff}" method="POST">
+		<!-- ID入力欄 -->
+		<div class="form-group">
+			<label for="id">社員ID：</label>
+			<input type="text" th:field="*{id}" />
+			<!--バリデーションエラー表示-->
+			<div th:if="${#fields.hasErrors('id')}" th:errors="*{id}" style="color:red">
+			</div>
+		</div>
+		<!-- 名前入力欄 -->
+		<div class="form-group">
+			<label for="name">社員名：</label>
+			<input type="text" th:field="*{name}" />
+		</div>
+		<!-- 年齢入力欄 -->
+		<div class="form-group">
+			<label for="ageFrom">年齢：</label>
+			<input type="number" th:field="*{ageFrom}" />
+			<label for="ageTo">～</label>
+			<input type="number" th:field="*{ageTo}" />
+			<!--年齢エラーメッセージ-->
+			<div th:if="${#fields.hasErrors('ageFrom')}" th:errors="*{ageFrom}" style="color:red">
+			</div>
+			<div th:if="${#fields.hasErrors('ageTo')}" th:errors="*{ageTo}" style="color:red">
+			</div>
+		</div>
+		<!-- 開始日入力欄 -->
+		<div class="form-group">
+			<label for="startDate">開始日：</label>
+			<input type="date" th:field="*{startDateFrom}" placeholder="From" />
+			<label for="startDateTo">～</label>
+			<input type="date" th:field="*{startDateTo}" placeholder="To" />
+		</div>
+		<!-- 終了日入力欄 -->
+		<div class="form-group">
+			<label for="endDate">終了日：</label>
+			<input type="date" th:field="*{endDateFrom}" placeholder="From" />
+			<label for="endDateTo">～</label>
+			<input type="date" th:field="*{endDateTo}" placeholder="To" />
+		</div>
+		<!-- 送信ボタン -->
+		<div class="form-buttons">
+			<button type="submit" name="search">検索</button>
+			<button type="submit" name="clear">クリア</button>
+		</div>
+	</form>
+
+	<table border="1">
+		<tr>
+			<th>社員ID</th>
+			<th>社員名</th>
+			<th>年齢</th>
+			<th>開始日</th>
+			<th>終了日</th>
+		</tr>
+		<tr th:each="staff : ${staffList}">
+			<td th:text="${staff.id == null ? '登録されていません' : staff.id}"></td>
+			<td th:text="${staff.name == null ? '登録されていません' : staff.name}"></td>
+			<td th:text="${staff.age == null ? '登録されていません' : staff.age}"></td>
+			<td th:text="${staff.startDate == null ? '---' : #temporals.format(staff.startDate, 'yyyy/MM/dd')}"></td>
+			<td th:text="${staff.endDate == null ? '---' : #temporals.format(staff.endDate, 'yyyy/MM/dd')}"></td>
+		</tr>
+	</table>
+	<!--検索結果０件-->
+	<div th:if="${NoList != null}" th:text="${NoList}"></div>
+</body>
+
+</html>

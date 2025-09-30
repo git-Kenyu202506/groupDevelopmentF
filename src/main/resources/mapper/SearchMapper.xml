@@ -5,16 +5,48 @@
 
 <mapper namespace="com.example.demo.mapper.SearchMapper">
 	<!-- マッピング定義(ユーザー) -->
-	<resultMap type="com.example.demo.entity.Staff" id="staff">
-		<id column="id" property="userId" />
-		<result column="name" property="userName" />
+	<resultMap type="com.example.demo.entity.Staff" id="staffMap">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="password" property="password" />
 		<result column="age" property="age" />
 		<result column="start_date" property="startDate" />
 		<result column="end_date" property="endDate" />
 	</resultMap>
-	
-		<!-- ユーザー情報全件取得(初期表示用) -->
-	<select id="searchAll" resultType="com.example.demo.entity.Staff">
+
+	<!-- ユーザー情報全件取得(初期表示用) -->
+	<select id="searchAll" resultMap="staffMap">
 		SELECT * FROM staff
+	</select>
+	<!-- ユーザー情報取得(検索処理用) -->
+	<select id="searchUser"
+		parameterType="com.example.demo.entity.Staff" resultMap="staffMap">
+		SELECT * FROM staff
+		<where>
+			<if test="id != null and id != ''">
+				AND id = #{id}
+			</if>
+			<if test="name != null and name !=''">
+				AND name like concat ('%' #{name} '%')
+			</if>
+			<if test="ageFrom != null">
+				AND age &gt;= #{ageFrom}
+			</if>
+			<if test="ageTo != null">
+				AND age &lt;= #{ageTo}
+			</if>
+			<if test="startDateFrom != null">
+				AND Date(start_date) &gt;= #{startDateFrom}
+			</if>
+			<if test="startDateTo != null">
+				AND Date(start_date) &lt;= #{startDateTo}
+			</if>
+			<if test="endDateFrom != null">
+				AND end_date &gt;= #{endDateFrom}
+			</if>
+			<if test="endDateTo != null">
+				AND end_date &lt;= #{endDateTo}
+			</if>
+		</where>
 	</select>
 </mapper>
