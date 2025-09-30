@@ -132,6 +132,44 @@ button:hover{
     opacity: 0.5;
 }
 
+/* 削除完了画面 */
+span{
+    position: absolute;
+    top: 30%;
+    transform: translateY(-50%);
+    font-weight: bold;
+}
+
+div.menu_bt a{
+    display: block;
+    margin-top: 200px;
+    margin-right: 50px;
+    padding: 5px 15px 5px 15px;
+    max-width: 300px;
+    text-align: center;
+    border: 1px solid #5f5c5c;
+    text-decoration: none;
+    color: inherit;
+    background-color: rgb(203, 203, 197);
+}
+
+div.search_bt a{
+    display: block;
+    margin-top: 200px;
+    margin-left: 50px;
+    padding: 5px 15px 5px 15px;
+    max-width: 300px;
+    text-align: center;
+    border: 1px solid #5f5c5c;
+    text-decoration: none;
+    color: inherit;
+    background-color: rgb(246, 249, 150);
+}
+
+a:hover{
+    opacity: 0.5;
+}
+
 /* フッター */
 footer{
     padding: 30px;
