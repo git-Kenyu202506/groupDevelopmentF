@@ -77,7 +77,7 @@ public class DeleteController {
 		int id = (int)this.session.getAttribute("keyId");
 		
 //		自分のデータ削除しようとした場合のエラー処理
-		if(id == idList.get(0)) {
+		if(idList.contains(id)) {
 			model.addAttribute("error","3");
 			model.addAttribute("check",idList);
 			model.addAttribute("back",url);
@@ -112,7 +112,9 @@ public class DeleteController {
 					model.addAttribute("id",idList.get(0));
 					return "deleteForm";
 				}else {
-					return "searchForm";
+					model.addAttribute("id",idList);
+					return "dummySearch";
+
 				}
 			}
 	
