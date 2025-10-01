@@ -170,6 +170,23 @@ a:hover{
     opacity: 0.5;
 }
 
+/* ダミーページ用 */
+div.dummy{
+    height: 80vh;
+}
+
+div.dummy_form{
+    width: 400px;
+    min-height: 300px;
+    margin: 0 auto;
+    margin-top: 30px;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    border-radius: 10px;
+    border: 1px solid #5f5c5c;
+}
+
+
 /* フッター */
 footer{
     padding: 30px;
