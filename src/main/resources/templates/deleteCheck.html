@@ -35,7 +35,7 @@
          <div class="delreturn">
         <form action="/delete/execution" method="post">
             <input th:each = "delID : ${check}" type="hidden" name="id" th:value="${delID}">
-            <input type="hidden" name="url" value="deleteForm">
+            <input type="hidden" name="url" th:value="${back}">
             <button class="delete_bt" type="submit">削除</button>
         </form>
      
@@ -57,6 +57,7 @@
             </div>
             <div th:case = "searchForm">
                 <input type="hidden" name="url" value="searchForm">
+                <input th:each = "delID : ${check}" type="hidden" name="id" th:value="${delID}">
             </div>
             <button class="return_bt" type="submit">戻る</button>
          </form>
