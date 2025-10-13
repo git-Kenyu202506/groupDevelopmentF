@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>削除確認画面</title>
+    <link rel="stylesheet" th:href="@{/delete.css}"/>
+</head>
+<body>
+        <!-- ヘッダー -->
+    <header>
+        <h3>トップメニュー</h3>
+        <div class="user">
+        <p th:text = "${session.keyName} + 'さん'"></p>
+        <p th:text = "${#temporals.format(session.keyDateTime,'yyyy/MM/dd　HH:mm:ss')}"></p>
+        </div>
+    </header>
+
+
+        <!-- メイン -->
+    <main>
+        <div class="check_form">
+        <table>
+            <!-- 削除対象一覧 -->
+            <caption>削除確認画面</caption>
+            <tr>
+                <th>削除予定ID</th>
+                <td th:each = "delID : ${check}" th:text = "${delID}"></td>
+            </tr>
+        </table>
+
+        <p class="lastcheck">こちらを削除します。よろしいですか？</p>
+
+        <!-- 削除ボタン -->
+         <div class="delreturn">
+        <form action="/delete/execution" method="post">
+            <input th:each = "delID : ${check}" type="hidden" name="id" th:value="${delID}">
+            <input type="hidden" name="url" th:value="${back}">
+            <button class="delete_bt" type="submit">削除</button>
+        </form>
+     
+        <!-- 自分のデータ削除不可エラー -->
+        <script th:if="${error} == 3">
+            alert('※自分のデータは削除できません');       
+        </script>
+
+        <!-- DBに対象データがなしエラー -->
+        <script th:if="${error} == 4">
+            alert('※対象データがありません');
+        </script>
+
+        <!-- 戻るボタン -->
+         <form th:switch = "${back}" action="/delete/back" method="get">
+            <div th:case = "deleteForm">
+                <input type="hidden" name="url" value="deleteForm">
+                <input th:each = "delID : ${check}" type="hidden" name="id" th:value="${delID}">
+            </div>
+            <div th:case = "searchForm">
+                <input type="hidden" name="url" value="searchForm">
+                <input th:each = "delID : ${check}" type="hidden" name="id" th:value="${delID}">
+            </div>
+            <button class="return_bt" type="submit">戻る</button>
+         </form>
+         </div>
+        </div>
+
+    </main>
+
+         <!-- フッター -->
+      <footer>
+        <small>Copyright&copy; 2025JavaStudy TeamF</small>
+      </footer>
+
+
+</body>
+</html>

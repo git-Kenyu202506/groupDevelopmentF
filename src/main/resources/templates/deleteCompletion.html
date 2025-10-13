@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>削除完了画面</title>
+    <link rel="stylesheet" th:href="@{/delete.css}"/>
+    <link rel="stylesheet" href="../static/delete.css">
+</head>
+<body>
+         <!-- ヘッダー -->
+    <header>
+        <h3>トップメニュー</h3>
+        <div class="user">
+        <p th:text = "${session.keyName} + 'さん'"></p>
+        <p th:text = "${#temporals.format(session.keyDateTime,'yyyy/MM/dd　HH:mm:ss')}"></p>
+        </div>
+    </header>
+>
+
+        <!-- メイン -->
+     <main>
+        <span th:text = "${comp}">社員情報の削除完了しました。</span>
+
+        <div class="menu_bt">
+            <a th:href="@{/topmenu}">メニュー</a>
+        </div>
+        <div class="search_bt">
+            <a th:href="@{/search/list}">検索へ</a>
+     </main>
+
+         <!-- フッター -->
+      <footer>
+        <small>Copyright&copy; 2025JavaStudy TeamF</small>
+      </footer>     
+    
+</body>
+</html>
