@@ -14,4 +14,7 @@ public interface SearchMapper {
 
 	/*ユーザー検索表示*/
 	public List<Staff> searchUser(Staff staff);
+	
+    long countSearch();
 	}
+

@@ -14,9 +14,10 @@
 			<label for="id">社員ID：</label>
 			<input type="text" th:field="*{id}" />
 			<!--バリデーションエラー表示-->
-			<div th:if="${#fields.hasErrors('id')}" th:errors="*{id}" style="color:red">
+			<div th:if="${#fields.hasErrors('id')}" th:errors="*{id}" style="color:red" id="error1">
 			</div>
 		</div>
+
 		<!-- 名前入力欄 -->
 		<div class="form-group">
 			<label for="name">社員名：</label>
@@ -29,9 +30,9 @@
 			<label for="ageTo">～</label>
 			<input type="number" th:field="*{ageTo}" />
 			<!--年齢エラーメッセージ-->
-			<div th:if="${#fields.hasErrors('ageFrom')}" th:errors="*{ageFrom}" style="color:red">
+			<div th:if="${#fields.hasErrors('ageFrom')}" th:errors="*{ageFrom}" style="color:red" class="error2">
 			</div>
-			<div th:if="${#fields.hasErrors('ageTo')}" th:errors="*{ageTo}" style="color:red">
+			<div th:if="${#fields.hasErrors('ageTo')}" th:errors="*{ageTo}" style="color:red" class="error3">
 			</div>
 		</div>
 		<!-- 開始日入力欄 -->
@@ -57,7 +58,7 @@
 
 	<table border="1">
 		<tr>
-			<th>社員ID</th>
+			<th id="aaa">社員ID</th>
 			<th>社員名</th>
 			<th>年齢</th>
 			<th>開始日</th>
@@ -73,6 +74,28 @@
 	</table>
 	<!--検索結果０件-->
 	<div th:if="${NoList != null}" th:text="${NoList}"></div>
+	<!--アラート表示-->
+	<script>
+		let err1 = document.querySelector("#error1");
+		let err2 = document.querySelector(".error2");
+		let err3 = document.querySelector(".error3");
+		let msgs = [];
+		if (err1 && err1.innerText.trim() !== "") {
+			msgs.push(err1.innerText);
+		}
+		if (err2 && err2.innerText.trim() !== "") {
+			msgs.push(err2.innerText);
+		}
+		if (err3 && err3.innerText.trim() !== "") {
+			msgs.push(err3.innerText);
+		}
+
+		if (msgs.length > 0) {
+			alert(msgs.join("\n"));
+		}
+	</script>
+	<script src="validation.js"></script>
+
 </body>
 
 </html>

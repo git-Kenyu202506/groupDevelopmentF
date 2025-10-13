@@ -73,6 +73,7 @@ public class SearchController {
 			System.out.println("検索結果１件目のID＝" + searchList.get(0).getId());
 		}
 		return "search";
+		
 	}
 
 	/* クリア処理 */
