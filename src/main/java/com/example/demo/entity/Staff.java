@@ -9,8 +9,8 @@ public class Staff {
 	private String name;
 	private String password;
 	private Integer age;
-	private Integer ageFrom;
-	private Integer ageTo;
+	private String ageFrom;
+	private String ageTo;
 	private LocalDateTime startDate;
 	private LocalDate endDate;
 	private LocalDate startDateFrom;
@@ -51,19 +51,19 @@ public class Staff {
 		this.age = age;
 	}
 
-	public Integer getAgeFrom() {
+	public String getAgeFrom() {
 		return ageFrom;
 	}
 
-	public void setAgeFrom(Integer ageFrom) {
+	public void setAgeFrom(String ageFrom) {
 		this.ageFrom = ageFrom;
 	}
 
-	public Integer getAgeTo() {
+	public String getAgeTo() {
 		return ageTo;
 	}
 
-	public void setAgeTo(Integer ageTo) {
+	public void setAgeTo(String ageTo) {
 		this.ageTo = ageTo;
 	}
 

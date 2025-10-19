@@ -20,103 +20,107 @@ import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/delete")
 public class DeleteController {
-	
+
 	@Autowired
 	private DeleteService deleteService;
-	
+
 	@Autowired
 	private HttpSession session;
-	
-//	localhost:8080/delete/formにアクセス→削除入力画面を表示
+
+	//	localhost:8080/delete/formにアクセス→削除入力画面を表示
 	@GetMapping("/form")
 	public String deleteForm(Model model) {
-		String name  = (String)this.session.getAttribute("keyName");
-		LocalDateTime dateTime = (LocalDateTime)this.session.getAttribute("keyDateTime");
-		int id = (int)this.session.getAttribute("keyId");
+		String name = (String) this.session.getAttribute("keyName");
+		LocalDateTime dateTime = (LocalDateTime) this.session.getAttribute("keyDateTime");
+		String idStr = (String) session.getAttribute("keyId"); // Stringとして取得
+		Integer id = idStr != null ? Integer.valueOf(idStr) : null; // Integerに変換
+		//		int id = (int) this.session.getAttribute("keyId");
+		// Modelに格納してビューで使用
+		model.addAttribute("name", name);
+		model.addAttribute("dateTime", dateTime);
+		model.addAttribute("id", id);
 		return "deleteForm";
 	}
-	
-//	localhost:8080/delete/checkにアクセス→削除確認画面を表示
+
+	//	localhost:8080/delete/checkにアクセス→削除確認画面を表示
 	@PostMapping("/check")
 	public String deleteCheck(
 			Model model,
-			@RequestParam("id")List<String>idList,
-			@RequestParam("url")String url){
-		try{
-			List<Integer>numIdList = new ArrayList<Integer>();
-			for(String id : idList) {
+			@RequestParam("id") List<String> idList,
+			@RequestParam("url") String url) {
+		try {
+			List<Integer> numIdList = new ArrayList<Integer>();
+			for (String id : idList) {
 				numIdList.add(Integer.parseInt(id));
 			}
-//			空欄だった場合のエラー処理
-			if(numIdList.isEmpty()) {
-				model.addAttribute("error","1");
+			//			空欄だった場合のエラー処理
+			if (numIdList.isEmpty()) {
+				model.addAttribute("error", "1");
 				return "deleteForm";
-				
-//			成功した場合の処理
-			}else{
-				model.addAttribute("check",numIdList);
-				model.addAttribute("back",url);
+
+				//			成功した場合の処理
+			} else {
+				model.addAttribute("check", numIdList);
+				model.addAttribute("back", "/search/list");
 				return "deleteCheck";
 			}
 
-//			数字以外が入力された場合のエラー処理
-		}	catch(NumberFormatException e) {
-			model.addAttribute("error","2");
-			model.addAttribute("id",idList.get(0));
+			//			数字以外が入力された場合のエラー処理
+		} catch (NumberFormatException e) {
+			model.addAttribute("error", "2");
+			model.addAttribute("id", idList.get(0));
 			return "deleteForm";
-			}
-		
+		}
+
 	}
-	
-//	localhost:8080/delete/executionにアクセス→削除処理→削除完了画面
+
+	//	localhost:8080/delete/executionにアクセス→削除処理→削除完了画面
 	@PostMapping("/execution")
 	public String deleteExecution(
 			Model model,
-			@RequestParam("id")List<Integer>idList,
-			@RequestParam("url")String url) {
-		int id = (int)this.session.getAttribute("keyId");
-		
-//		自分のデータ削除しようとした場合のエラー処理
-		if(idList.contains(id)) {
-			model.addAttribute("error","3");
-			model.addAttribute("check",idList);
-			model.addAttribute("back",url);
+			@RequestParam("id") List<Integer> idList,
+			@RequestParam("url") String url) {
+		int id = (int) this.session.getAttribute("keyId");
+
+		//		自分のデータ削除しようとした場合のエラー処理
+		if (idList.contains(id)) {
+			model.addAttribute("error", "3");
+			model.addAttribute("check", idList);
+			model.addAttribute("back", url);
 			return "deleteCheck";
 		}
-		
+
 		int delNum = deleteService.delete(idList);
-		
-//		対象データがなかった場合のエラー処理		
-		if(delNum == 0) {
-			model.addAttribute("error","4");
-			model.addAttribute("check",idList);
-			model.addAttribute("back",url);
+
+		//		対象データがなかった場合のエラー処理		
+		if (delNum == 0) {
+			model.addAttribute("error", "4");
+			model.addAttribute("check", idList);
+			model.addAttribute("back", url);
 			return "deleteCheck";
 		}
-		
+
 		else {
-			model.addAttribute("comp","社員情報の削除が完了しました");
+			model.addAttribute("comp", "社員情報の削除が完了しました");
 			return "deleteCompletion";
 		}
 	}
-	
-	
-//	localhost:8080/delete/backにアクセス→urlに応じたページに遷移[戻る処理]
+
+	//	localhost:8080/delete/backにアクセス→urlに応じたページに遷移[戻る処理]
 	@GetMapping("/back")
 	public String deleteBack(
 			Model model,
-			@RequestParam("url")String url,
-			@RequestParam("id")List<Integer>idList){
-		
-				if(url.equals ("deleteForm")) {
-					model.addAttribute("id",idList.get(0));
-					return "deleteForm";
-				}else {
-					model.addAttribute("id",idList);
-					return "dummySearch";
+			@RequestParam("url") String url,
+			@RequestParam("id") List<Integer> idList) {
 
-				}
-			}
-	
+		if (url.equals("deleteForm")) {
+			model.addAttribute("id", idList.get(0));
+			return "deleteForm";
+		} else {
+			model.addAttribute("id", idList);
+			return "redirect:/search/list";
+
+		}
+	}
 
 }

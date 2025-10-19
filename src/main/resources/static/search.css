@@ -1,50 +1,168 @@
-@charset "UTF-8";
-
-body {
-	background: #F0F2F5;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
-	margin: 0;
+/* 全体コンテナ */
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 2rem auto;
+    gap: 2rem;
+    font-family: Arial, sans-serif;
 }
 
-/*form {*/
-/*	display: flex;*/
-/*	flex-direction: column;*/
-/*}*/
+/* 検索フォーム */
+.search-form {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
 
-/*label {*/
-/*	display: block;*/
-/*	margin-bottom: 0.4rem;*/
-/*	font-weight: bold;*/
-/*	color: #444;*/
-/*}*/
+/* フォーム内グループ */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
 
-/*input[type="text"] {*/
-/*	padding: 0.6rem;*/
-/*	border: 1px solid #ccc;*/
-/*	border-radius: 6px;*/
-/*	font-size: 1rem;*/
-/*}*/
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
 
-/*button {*/
-/*	padding: 0.8rem;*/
-/*	background-color: #007BFF;*/
-/*	color: white;*/
-/*	border: none;*/
-/*	border-radius: 6px;*/
-/*	font-size: 1rem;*/
-/*	cursor: pointer;*/
-/*	transition: background-color 0.3s ease;*/
-/*}*/
+.form-group input {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+}
 
-/*button:hover {*/
-/*	background-color: #0056b3;*/
-/*}*/
+/* フォームボタン */
+.form-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start;
+}
 
-tr {
-	text-align: center;
-	font-size: 1.1rem;
-	margin-top: 20px;
-	color: #555;}
+.form-buttons button {
+    flex: 1;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    transition: background-color 0.2s;
+}
+
+.form-buttons button:hover {
+    background-color: #0056b3;
+}
+
+/* 上下分割：検索フォームと検索結果 */
+.search-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* 検索結果テーブル */
+.search-result {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+}
+
+.search-result table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.search-result th,
+.search-result td {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.search-result th {
+    background-color: #007BFF;
+    color: white;
+}
+
+.search-result tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* 編集・削除ボタン */
+.search-result a.btn {
+    display: inline-block;
+    padding: 0.3rem 0.7rem;
+    margin: 0 0.2rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: white;
+    transition: background-color 0.2s;
+}
+
+.search-result a.edit-btn {
+    background-color: #28a745;
+}
+
+.search-result a.edit-btn:hover {
+    background-color: #1e7e34;
+}
+
+.search-result a.delete-btn {
+    background-color: #dc3545;
+}
+
+.search-result a.delete-btn:hover {
+    background-color: #b02a37;
+}
+
+/* メニューと登録ボタン */
+.nav-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start;
+    margin-bottom: 1rem;
+}
+
+.nav-buttons a {
+    flex: 1;
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    background-color: #6c757d;
+    transition: background-color 0.2s;
+}
+
+.nav-buttons a.register {
+    background-color: #17a2b8;
+}
+
+.nav-buttons a:hover {
+    opacity: 0.8;
+}
+
+/* ヘッダーとフッター */
+header,
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 2rem;
+    background-color: cadetblue;
+    color: white;
+}
+
+footer {
+    text-align: center;
+}

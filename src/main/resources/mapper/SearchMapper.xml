@@ -23,10 +23,10 @@
 		SELECT * FROM staff
 		<where>
 			<if test="id != null and id != ''">
-				AND id = #{id}
+				AND id = CAST(#{id} AS UNSIGNED)
 			</if>
 			<if test="name != null and name !=''">
-				AND name like concat ('%' #{name} '%')
+				AND name like concat('%', #{name}, '%')
 			</if>
 			<if test="ageFrom != null">
 				AND age &gt;= #{ageFrom}
@@ -47,6 +47,37 @@
 				AND end_date &lt;= #{endDateTo}
 			</if>
 		</where>
-		
 	</select>
+	<!-- 複数引数を受け取る検索処理用 -->
+	<select id="searchUserByConditions" parameterType="map"
+		resultMap="staffMap">
+		SELECT * FROM staff
+		<where>
+			<if test="id != null and id != ''">
+				AND id = CAST(#{id} AS UNSIGNED)
+			</if>
+			<if test="name != null and name != ''">
+				AND name LIKE concat('%', #{name}, '%')
+			</if>
+			<if test="ageFrom != null">
+				AND age &gt;= #{ageFrom}
+			</if>
+			<if test="ageTo != null">
+				AND age &lt;= #{ageTo}
+			</if>
+			<if test="startDateFrom != null">
+				AND DATE(start_date) &gt;= #{startDateFrom}
+			</if>
+			<if test="startDateTo != null">
+				AND DATE(start_date) &lt;= #{startDateTo}
+			</if>
+			<if test="endDateFrom != null">
+				AND end_date &gt;= #{endDateFrom}
+			</if>
+			<if test="endDateTo != null">
+				AND end_date &lt;= #{endDateTo}
+			</if>
+		</where>
+	</select>
+
 </mapper>

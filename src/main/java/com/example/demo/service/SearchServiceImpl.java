@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,17 @@ public class SearchServiceImpl implements SearchService {
 	}
 
 	@Override
-	public List<Staff> searchUser(Staff staff) {
-		return searchMapper.searchUser(staff);
+	public List<Staff> searchUser(
+			String id,
+			String name,
+			Integer ageFrom,
+			Integer ageTo,
+			LocalDate startDateFrom,
+			LocalDate startDateTo,
+			LocalDate endDateFrom,
+			LocalDate endDateTo) {
+		return searchMapper.searchUserByConditions(
+				id, name, ageFrom, ageTo, startDateFrom, startDateTo, endDateFrom, endDateTo);
 	}
 
 }
