@@ -87,34 +87,46 @@
 				<span th:text="${staffList.isEmpty() ? '0' : staffList.size()}">0</span>件
 				<span th:if="${staffList.isEmpty()}" style="color:red;">検索結果がありません</span>
 			</div>
-			<form th:action="@{/search/list}" method="post">
-				<input type="hidden" name="url" value="search/list" />
-				<table border="1">
-					<tr>
-						<th>選択</th>
-						<th id="aaa">社員ID</th>
-						<th>名前</th>
-						<th>年齢</th>
-						<th>開始日</th>
-						<th>終了日</th>
-					</tr>
-					<tr th:each="staff : ${staffList}">
-						<td>
-							<input type="checkbox" name="selectedIds" th:value="${staff.id}" />
-						</td>
-						<td th:text="${staff.id == null ? '登録されていません' : staff.id}"></td>
-						<td th:text="${staff.name == null ? '登録されていません' : staff.name}"></td>
-						<td th:text="${staff.age == null ? '登録されていません' : staff.age}"></td>
-						<td
-							th:text="${staff.startDate == null ? '---' : #temporals.format(staff.startDate, 'yyyy/MM/dd')}">
-						</td>
-						<td th:text="${staff.endDate == null ? '---' : #temporals.format(staff.endDate, 'yyyy/MM/dd')}">
-						</td>
-					</tr>
-				</table>
-				<button type="submit" name="delete" class="btn" onclick="return checkSelection()">削除</button>
+			<!--			<form th:action="@{/search/list}" method="post">-->
+			<!--				<input type="hidden" name="url" value="search/list" />-->
+			<table border="1">
+				<tr>
+					<th>選択</th>
+					<th id="aaa">社員ID</th>
+					<th>名前</th>
+					<th>年齢</th>
+					<th>開始日</th>
+					<th>終了日</th>
+				</tr>
+				<tr th:each="staff : ${staffList}">
+					<td>
+						<input type="checkbox" name="selectedIds" th:value="${staff.id}" />
+					</td>
+					<!-- 社員ID列 -->
+					<td>
+						<a th:if="${staff.id != null}" th:href="@{/updateForm(id=${staff.id})}"
+							th:text="${staff.id}"></a>
+						<span th:if="${staff.id == null}">登録されていません</span>
+					</td>
 
-			</form>
+					<!-- 名前列 -->
+					<td th:text="${staff.name != null ? staff.name : '登録されていません'}"></td>
+
+					<!-- 年齢列 -->
+					<td th:text="${staff.age != null ? staff.age : '登録されていません'}"></td>
+
+					<!-- 開始日列 -->
+					<td th:text="${staff.startDate != null ? #temporals.format(staff.startDate, 'yyyy/MM/dd') : '---'}">
+					</td>
+
+					<!-- 終了日列 -->
+					<td th:text="${staff.endDate != null ? #temporals.format(staff.endDate, 'yyyy/MM/dd') : '---'}">
+					</td>
+				</tr>
+			</table>
+			<button type="button" name="delete" class="btn" onclick="checkSelection()">削除</button>
+
+			<!--</form>-->
 		</div>
 	</div>
 	</div>
@@ -129,22 +141,37 @@
 		});
 		if (msgs.length) alert(msgs.join("\n"));
 
+		//チェックボックス
 		function checkSelection() {
 			const checkboxes = document.querySelectorAll('input[name="selectedIds"]:checked');
 			if (checkboxes.length === 0) {
 				alert("削除対象を1件以上選択してください");
 				return false; // フォーム送信をキャンセル
 			}
+			const ids = Array.from(checkboxes).map(cb => cb.value);
+
+			//選択したIDを削除画面へ譲渡
+			if (ids.length === 1) {
+				const id = ids[0];
+				window.location.href = '/delete/form?id=' + encodeURIComponent(id);
+				return false;// フォーム送信をキャンセル
+			}
+			//複数選択はアラート
+			if (ids.length > 1) {
+				alert("削除は一件ずつ行ってください");
+				return false;//フォーム送信をキャンセル
+			}
+
 			return true; // フォーム送信
 		}
 	</script>
 	<script src="validation.js"></script>
 
+	<!-- フッター -->
+	<footer>
+		<small>Copyright&copy; 2025JavaStudy TeamF</small>
+	</footer>
 </body>
 
-<!-- フッター -->
-<footer>
-	<small>Copyright&copy; 2025JavaStudy TeamF</small>
-</footer>
 
 </html>
